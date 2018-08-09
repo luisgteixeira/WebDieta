@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Info, Peso, Refeicao
 
-# Register your models here.
+admin.site.register(Info)
+admin.site.register(Peso)
+admin.site.register(Refeicao)
