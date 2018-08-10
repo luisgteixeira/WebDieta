@@ -3,22 +3,28 @@ from django.conf import settings
 
 class Info(models.Model):
     id_dieta = models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, default=0, editable=0)
-    inicio = models.DateField()
-    final = models.DateField()
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    data_inicio = models.DateField()
+    data_final = models.DateField()
     peso_ideal = models.FloatField()
     altura = models.FloatField()
 
+    def __str__(self):
+        return self.usuario.username
+
 class Peso(models.Model):
     id_peso = models.AutoField(primary_key=True)
-    dieta_peso = models.ForeignKey('Info', on_delete=models.DO_NOTHING)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     peso = models.FloatField()
     data_pesagem = models.DateField()
+
+    def __str__(self):
+        return self.usuario.username
 
 
 class Refeicao(models.Model):
     id_refeicao = models.AutoField(primary_key=True)
-    refeicao_dieta = models.ForeignKey('Info', on_delete=models.DO_NOTHING)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     TIPOS_OPCOES = (
         ('CAFE_MANHA', 'Café da Manhã'),
         ('LANCHE', 'Lanche'),
@@ -34,3 +40,6 @@ class Refeicao(models.Model):
     )
     horario = models.TimeField()
     descricao = models.TextField()
+
+    def __str__(self):
+        return self.usuario.username
