@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <title>Cadastrar - WebDieta</title>
+  </head>
+  <body>
+    <form method="post" action="{% url 'cadastrar' %}">
+      {% csrf_token %}
+
+      {% if form.errors %}
+        <p>Formulário possui erros!</p>
+      {% endif %}
+
+      {{ form }}
+
+      <input type='submit' value='Cadastrar'>
+    </form>
+  </body>
+</html>

@@ -1,8 +1,9 @@
 from django.db import models
+from django.conf import settings
 
 class Info(models.Model):
     id_dieta = models.AutoField(primary_key=True)
-    # usuario = models.ForeignKey()
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, default=0, editable=0)
     inicio = models.DateField()
     final = models.DateField()
     peso_ideal = models.FloatField()

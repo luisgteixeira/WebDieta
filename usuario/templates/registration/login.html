@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login - WebDieta</title>
+  </head>
+  <body>
+
+    {% if form.errors %}
+    <p>Você digitou algo errado!</p>
+    {% endif %}
+
+    {% if next %}
+    <p>Você não pode acessar essa página.</p>
+    <form action="{% url 'login' %}?next={{next}}" method="post" >
+    {%else%}
+    <form method="post" action="{% url 'login' %}">
+    {% endif %}
+      {% csrf_token %}
+
+      <p>Nome de usuário: {{ form.username }}</p>
+      <p>Senha: {{ form.password }}</p>
+
+      <p><input type="submit" = value="Entrar"></p>
+      <input type="hidden" name="next" value="{{ next }}"
+    </form>
+
+  </body>
+</html>

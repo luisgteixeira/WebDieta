@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dieta.urls')),
+    path('', include('usuario.urls')),
+    path('', include('django.contrib.auth.urls')),
 ]
