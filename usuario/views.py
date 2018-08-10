@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from .forms import FormularioCadastro
 
 def cadastrar(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = FormularioCadastro(request.POST)
 
         if form.is_valid():
             form.save()
@@ -14,7 +15,7 @@ def cadastrar(request):
             login(request, user)
             return(redirect('/dashboard/'))
     else:
-        form = UserCreationForm()
+        form = FormularioCadastro()
 
     contexto = {'form' : form}
     return(render(request, 'registration/cadastrar.html', contexto))

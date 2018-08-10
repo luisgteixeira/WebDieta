@@ -1,20 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
   <head>
     <meta charset="utf-8">
-    <title>Cadastrar - WebDieta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WebDieta</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+
+    <style>
+      ul.errorlist {
+        display: block;
+        color: #666;
+        font-size: 0.875em;
+      }
+    </style>
   </head>
+
   <body>
-    <form method="post" action="{% url 'cadastrar' %}">
-      {% csrf_token %}
 
-      {% if form.errors %}
-        <p>Formulário possui erros!</p>
-      {% endif %}
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
 
-      {{ form }}
+              <form class="pure-form pure-form-stacked" method="post" action="{% url 'cadastrar' %}">
+                {% csrf_token %}
 
-      <input type='submit' value='Cadastrar'>
-    </form>
+                <div align='center'>
+                  <table>
+                      {{ form.as_table }}
+                       <tr>
+                          <td></td>
+                          <td>
+                            <a href="../" class="pure-button">Cancelar</a>
+                            <input class="pure-button pure-button-primary" type="submit" value="Cadastrar" />
+                          </td>
+                      </tr>
+                   </table>
+               </div>
+              </form>
+          </div>
+      </div>
+    </div>
   </body>
+
 </html>
