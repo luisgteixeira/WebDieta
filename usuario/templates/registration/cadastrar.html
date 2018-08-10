@@ -7,8 +7,10 @@
     <title>WebDieta</title>
 
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
-
     <style>
+      div {
+          margin: 7%;
+      }
       ul.errorlist {
         display: block;
         color: #666;
@@ -19,29 +21,25 @@
 
   <body>
 
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
+    <div align='center'>
 
-              <form class="pure-form pure-form-stacked" method="post" action="{% url 'cadastrar' %}">
-                {% csrf_token %}
+      <form class="pure-form pure-form-stacked" method="post" action="{% url 'cadastrar' %}">
+        {% csrf_token %}
 
-                <div align='center'>
-                  <table>
-                      {{ form.as_table }}
-                       <tr>
-                          <td></td>
-                          <td>
-                            <a href="../" class="pure-button">Cancelar</a>
-                            <input class="pure-button pure-button-primary" type="submit" value="Cadastrar" />
-                          </td>
-                      </tr>
-                   </table>
-               </div>
-              </form>
-          </div>
-      </div>
+        <table>
+            {{ form.as_table }}
+             <tr>
+                <td></td>
+                <td>
+                  <a href="../login" class="pure-button">Cancelar</a>
+                  <input class="pure-button pure-button-primary" type="submit" value="Cadastrar" />
+                </td>
+            </tr>
+         </table>
+       </form>
+
     </div>
+
   </body>
 
 </html>
