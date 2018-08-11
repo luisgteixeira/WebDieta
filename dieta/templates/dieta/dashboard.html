@@ -1,5 +1,17 @@
 {% extends 'webdieta/base.html' %}
 
 {% block content %}
-    <h2>Olá, {{ user.first_name }} {{ user.last_name }}</h2>
+  <script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+  <script type="text/javascript" src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+  <style>
+    /* Remove fonte embaixo do grafico */
+    .raphael-group-23-creditgroup {
+      display:  none;
+    }
+  </style>
+
+  <h2>Olá, {{ user.first_name }} {{ user.last_name }}</h2>
+
+  <div id="chart-1" style="margin: 2%;">{{ output|safe }}</div>
+
 {% endblock %}
