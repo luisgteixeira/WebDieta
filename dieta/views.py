@@ -4,13 +4,39 @@ from django.contrib.auth import authenticate
 from .fusioncharts import FusionCharts
 from django.http import HttpResponse
 from collections import OrderedDict
-from .forms import FormularioPeso
-from dieta.models import *
+from .models import *
+from .forms import *
 import datetime
 
 @login_required(login_url='/login/')
 def dieta(request):
-    return(render(request, 'dieta/dieta.html'))
+
+    form_refeicao = FormularioRefeicao()
+    refeicoes = Refeicao.objects.filter(usuario_id=request.user.id).order_by('horario')
+
+    if(request.method == 'POST'):
+        if('data_inicio' in request.POST.keys()):
+            form_info = FormularioInfo(request.POST)
+            if(form_info.is_valid()):
+                form_info.save(request.user)
+
+        elif('tipo' in request.POST.keys()):
+            form_refeicao = FormularioRefeicao(request.POST)
+            if(form_refeicao.is_valid()):
+                form_refeicao.save(request.user)
+                return(redirect('dieta'))
+
+    else:
+        try:
+            info = Info.objects.get(usuario_id=request.user.id)
+            inicial = {'data_inicio': info.data_inicio, 'data_final': info.data_final, 'peso_ideal': info.peso_ideal, 'altura': info.altura}
+        except Exception as e:
+            inicial = {}
+
+        form_info = FormularioInfo(initial=inicial)
+
+    return(render(request, 'dieta/dieta.html', {'form_info': form_info, 'form_refeicao': form_refeicao, 'refeicoes': refeicoes}))
+
 
 @login_required(login_url='/login/')
 def registrarPeso(request):

@@ -1,5 +1,94 @@
 {% extends 'webdieta/base.html' %}
 
 {% block content %}
-    <h2>Dieta do (a) {{ user.first_name }} {{ user.last_name }}</h2>
+
+<style>
+.principal {
+  width:  50%;
+}
+</style>
+
+<div align='center'>
+
+  <div class="principal" >
+    <form id="info_form" class="pure-form pure-form-stacked" method="post" action="{% url 'dieta' %}">
+      <legend>Dados Gerais</legend>
+      {% csrf_token %}
+
+      <table>
+          <tr>
+            <td>
+              <label>{{ form_info.data_inicio.label }}</label>
+              {{ form_info.data_inicio }}
+            </td>
+            <td>
+              <label>{{ form_info.data_final.label }}</label>
+              {{ form_info.data_final }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>{{ form_info.peso_ideal.label }}</label>
+              {{ form_info.peso_ideal }}
+            </td>
+            <td>
+              <label>{{ form_info.altura.label }}</label>
+              {{ form_info.altura }}
+            </td>
+          </tr>
+       </table>
+
+       <input class="pure-button pure-button-primary" type="submit" value="Salvar" />
+
+     </form>
+
+  </div>
+  </br></br>
+  <div class="principal" >
+    <form id="refeicao_form" class="pure-form pure-form-stacked" method="post" action="{% url 'dieta' %}">
+      <legend>Dieta</legend>
+      {% csrf_token %}
+
+      <table>
+          <tr>
+            <td>
+              <label>{{ form_refeicao.tipo.label }}</label>
+              {{ form_refeicao.tipo }}
+            </td>
+            <td>
+              <label>{{ form_refeicao.horario.label }}</label>
+              {{ form_refeicao.horario }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <label>{{ form_refeicao.descricao.label }}</label>
+              {{ form_refeicao.descricao }}
+            </td>
+          </tr>
+       </table>
+
+       <input class="pure-button pure-button-primary" type="submit" value="Adicionar" />
+
+     </form>
+
+  </div>
+  </br></br>
+  <div align='left' class="principal" >
+    {% for refeicao in refeicoes %}
+
+      <table class="pure-table pure-table-horizontal" style="width:100%">
+        <thead>
+            <tr><th>{{ refeicao.horario }} - {{ refeicao.tipo }}</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>{{ refeicao.descricao }}</td></tr>
+        </tbody>
+      </table>
+      </br>
+
+    {% endfor %}
+  </div>
+
+</div>
 {% endblock %}
