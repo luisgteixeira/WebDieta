@@ -7,6 +7,12 @@
     <title>WebDieta</title>
 
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+    <style>
+      body {
+        font-family: 'Ubuntu', sans-serif;
+        color: #606060;
+      }
+    </style>
   </head>
 
   <body>
@@ -18,13 +24,9 @@
     </ul>
     </div>
 
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
-            </div>
-        </div>
+    <div class="container" style="height:100vh;margin:5%;">
+      {% block content %}
+      {% endblock %}
     </div>
 </body>
 
