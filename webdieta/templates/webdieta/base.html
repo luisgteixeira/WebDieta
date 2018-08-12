@@ -12,15 +12,23 @@
         font-family: 'Ubuntu', sans-serif;
         color: #606060;
       }
+      #menu {
+        background-color: #2d3e50;
+        height: 6%;
+      }
+      .pure-menu-link {
+        color: white;
+      }
     </style>
   </head>
 
   <body>
-    <div class="pure-menu pure-menu-horizontal">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed" id="menu">
       <ul class="pure-menu-list">
         <li class="pure-menu-item"><a href="../dashboard" class="pure-menu-link">Dashboard</a></li>
         <li class="pure-menu-item"><a href="../dieta" class="pure-menu-link">Dieta</a></li>
         <li class="pure-menu-item"><a href="../registrar-peso" class="pure-menu-link">Registrar peso</a></li>
+        <li class="pure-menu-item"><a href="../editar" class="pure-menu-link">Editar Usuário</a></li>
         <li class="pure-menu-item"><a href="../logout/?next=/login/" class="pure-menu-link">Sair</a></li>
     </ul>
     </div>

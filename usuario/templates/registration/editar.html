@@ -1,0 +1,25 @@
+{% extends 'webdieta/base.html' %}
+
+{% block content %}
+
+  <h2>Editar usuário {{ user.first_name }} {{ user.last_name }}</h2>
+  <div align='center'>
+
+    <form class="pure-form pure-form-stacked" method="post" action="{% url 'editar' %}">
+      {% csrf_token %}
+
+      <table>
+          {{ form.as_table }}
+           <tr>
+              <td></td>
+              <td>
+                <a href="../dashboard" class="pure-button">Cancelar</a>
+                <input class="pure-button pure-button-primary" type="submit" value="Salvar" />
+              </td>
+          </tr>
+       </table>
+     </form>
+
+  </div>
+
+{% endblock %}

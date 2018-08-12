@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django import forms
-from django.core.exceptions import ValidationError
 
 
 class FormularioCadastro(forms.Form):
@@ -36,11 +36,23 @@ class FormularioCadastro(forms.Form):
         return password2
 
     def save(self, commit=True):
-        user = User.objects.create_user(
+        usuario = User.objects.create_user(
             self.cleaned_data['username'],
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
             email=self.cleaned_data['email'],
             password=self.cleaned_data['password1']
         )
-        return user
+        return(usuario)
+
+class FormularioEditar(forms.Form):
+    first_name = forms.CharField(label='Nome')
+    last_name = forms.CharField(label='Sobrenome')
+
+    def save(self, commit=True):
+        usuario = User.objects.update(
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name']
+        )
+
+        return(usuario)
