@@ -49,8 +49,8 @@ class FormularioEditar(forms.Form):
     first_name = forms.CharField(label='Nome')
     last_name = forms.CharField(label='Sobrenome')
 
-    def save(self, commit=True):
-        usuario = User.objects.update(
+    def save(self, usuario, commit=True):
+        usuario = User.objects.filter(id=usuario.id).update(
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name']
         )

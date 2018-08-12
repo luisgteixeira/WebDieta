@@ -32,9 +32,7 @@ def editar(request):
             return(redirect('/dashboard/'))
     else:
         inicial = {'first_name': request.user.first_name,
-                    'last_name': request.user.last_name,
-                    'username': request.user.username,
-                    'email': request.user.email
+                    'last_name': request.user.last_name
                 }
 
         form = FormularioEditar(initial=inicial)

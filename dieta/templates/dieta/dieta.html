@@ -90,7 +90,17 @@
 
       <table class="pure-table pure-table-horizontal" style="width:100%">
         <thead>
-            <tr><th>{{ refeicao.horario }} - {{ refeicao.tipo }}</th></tr>
+          {% if refeicao.tipo == 'CAFE_MANHA' %}
+            <tr><th>{{ refeicao.horario }} - Café da Manhã</th></tr>
+          {% elif refeicao.tipo == 'LANCHE' %}
+            <tr><th>{{ refeicao.horario }} - Lanche</th></tr>
+          {% elif refeicao.tipo == 'ALMOCO' %}
+            <tr><th>{{ refeicao.horario }} - Almoço</th></tr>
+          {% elif refeicao.tipo == 'JANTAR' %}
+            <tr><th>{{ refeicao.horario }} - Jantar</th></tr>
+          {% elif refeicao.tipo == 'CEIA' %}
+            <tr><th>{{ refeicao.horario }} - Ceia</th></tr>
+          {% endif %}
         </thead>
         <tbody>
             <tr><td>{{ refeicao.descricao }}</td></tr>

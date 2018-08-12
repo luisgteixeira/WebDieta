@@ -77,11 +77,12 @@ def grafico(pesos):
     config_graf["xAxisName"] = "Peso"
     config_graf["yAxisName"] = "Quilograma (Kg)"
     config_graf["numberSuffix"] = ""
-    config_graf["yAxisMaxValue"] = str(round(max(pesos_list)) + 3)
-    config_graf["yAxisMinValue"] = str(round(min(pesos_list)) - 3)
     config_graf["theme"] = "fusion"
     config_graf["displayStartIndex"] = "60"
     config_graf["displayEndIndex"] = "80"
+    if(len(pesos_list) > 0):
+        config_graf["yAxisMaxValue"] = str(round(max(pesos_list)) + 3)
+        config_graf["yAxisMinValue"] = str(round(min(pesos_list)) - 3)
 
     grafico = OrderedDict()
     grafico["chart"] = config_graf
