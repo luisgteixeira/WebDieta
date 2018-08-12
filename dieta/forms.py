@@ -30,21 +30,21 @@ class FormularioInfo(forms.Form):
     altura = forms.FloatField(label='Altura')
 
     def save(self, usuario, commit=True):
-        info = Info.objects.get(usuario_id=usuario.id)
-        if(info is None):
-            info = Info.objects.create(
-                usuario_id=usuario.id,
-                data_inicio=self.cleaned_data['data_inicio'],
-                data_final=self.cleaned_data['data_final'],
-                peso_ideal=self.cleaned_data['peso_ideal'],
-                altura=self.cleaned_data['altura']
-            )
-        else:
+        try:
+            info = Info.objects.get(usuario_id=usuario.id)
             info = Info.objects.update(
-                data_inicio=self.cleaned_data['data_inicio'],
-                data_final=self.cleaned_data['data_final'],
-                peso_ideal=self.cleaned_data['peso_ideal'],
-                altura=self.cleaned_data['altura']
+            data_inicio=self.cleaned_data['data_inicio'],
+            data_final=self.cleaned_data['data_final'],
+            peso_ideal=self.cleaned_data['peso_ideal'],
+            altura=self.cleaned_data['altura']
+            )
+        except:
+            info = Info.objects.create(
+            usuario_id=usuario.id,
+            data_inicio=self.cleaned_data['data_inicio'],
+            data_final=self.cleaned_data['data_final'],
+            peso_ideal=self.cleaned_data['peso_ideal'],
+            altura=self.cleaned_data['altura']
             )
         return(info)
 

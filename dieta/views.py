@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from .fusioncharts import FusionCharts
@@ -40,15 +41,23 @@ def dieta(request):
 
 @login_required(login_url='/login/')
 def registrarPeso(request):
+    erro = ''
     if(request.method == 'POST'):
         form = FormularioPeso(request.POST)
         if(form.is_valid()):
-            form.save(request.user)
-            return(redirect('/dashboard/'))
+            try:
+                info = Info.objects.get(usuario_id=request.user.id)
+                if(request.POST['data_pesagem'] >= info.data_inicio.strftime("%d/%m/%Y") and request.POST['data_pesagem'] <= info.data_final.strftime("%d/%m/%Y")):
+                    form.save(request.user)
+                    return(redirect('/dashboard/'))
+                else:
+                    erro = "Data de pesagem fora do intervalo de tempo da dieta"
+            except:
+                erro = "Nenhuma dieta foi cadastrada ainda"
     else:
         form = FormularioPeso()
 
-    return(render(request, 'dieta/registrar-peso.html', {'form': form}))
+    return(render(request, 'dieta/registrar-peso.html', {'form': form, 'erro': erro}))
 
 
 @login_required(login_url='/login/')
