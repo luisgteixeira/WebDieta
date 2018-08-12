@@ -69,6 +69,7 @@ def dashboard(request):
 
 
 def grafico(pesos):
+    pesos_list = [p['peso'] for p in pesos.values()]
 
     config_graf = OrderedDict()
     config_graf["caption"] = ""
@@ -76,6 +77,8 @@ def grafico(pesos):
     config_graf["xAxisName"] = "Peso"
     config_graf["yAxisName"] = "Quilograma (Kg)"
     config_graf["numberSuffix"] = ""
+    config_graf["yAxisMaxValue"] = str(round(max(pesos_list)) + 3)
+    config_graf["yAxisMinValue"] = str(round(min(pesos_list)) - 3)
     config_graf["theme"] = "fusion"
     config_graf["displayStartIndex"] = "60"
     config_graf["displayEndIndex"] = "80"
