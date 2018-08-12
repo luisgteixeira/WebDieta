@@ -30,12 +30,11 @@ def dieta(request):
     else:
         try:
             info = Info.objects.get(usuario_id=request.user.id)
-            inicial = {'data_inicio': info.data_inicio, 'data_final': info.data_final, 'peso_ideal': info.peso_ideal, 'altura': info.altura}
-        except Exception as e:
+            inicial = {'data_inicio': info.data_inicio.strftime('%Y-%m-%d'), 'data_final': info.data_final.strftime('%Y-%m-%d'), 'peso_ideal': info.peso_ideal, 'altura': info.altura}
+        except:
             inicial = {}
 
         form_info = FormularioInfo(initial=inicial)
-
     return(render(request, 'dieta/dieta.html', {'form_info': form_info, 'form_refeicao': form_refeicao, 'refeicoes': refeicoes}))
 
 
@@ -47,11 +46,11 @@ def registrarPeso(request):
         if(form.is_valid()):
             try:
                 info = Info.objects.get(usuario_id=request.user.id)
-                if(request.POST['data_pesagem'] >= info.data_inicio.strftime("%d/%m/%Y") and request.POST['data_pesagem'] <= info.data_final.strftime("%d/%m/%Y")):
+                if(request.POST['data_pesagem'] >= info.data_inicio.strftime("%Y-%m-%d") and request.POST['data_pesagem'] <= info.data_final.strftime("%Y-%m-%d")):
                     form.save(request.user)
                     return(redirect('/dashboard/'))
                 else:
-                    erro = "Data de pesagem fora do intervalo de tempo da dieta"
+                    erro = "Data de pesagem fora do intervalo de tempo da dieta [" + info.data_inicio.strftime("%d/%m/%Y") + " - " + info.data_final.strftime("%d/%m/%Y") + "]"
             except:
                 erro = "Nenhuma dieta foi cadastrada ainda"
     else:

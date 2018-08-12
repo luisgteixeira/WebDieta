@@ -7,19 +7,40 @@
 
     <form class="pure-form pure-form-stacked" method="post" action="{% url 'registrarPeso' %}">
       {% csrf_token %}
-      <div>
-        <strong>{{ erro }}</strong>
-      </div>
+
+      {% for error in form.data_pesagem.errors %}
+        {{ error }}
+      {% endfor %}
+
+      {{ erro }}
+
       <table>
-          {{ form.as_table }}
+          <tbody>
+            <tr>
+              <th><label for="id_{{form.peso.html_name}}">{{ form.peso.label }}:</label></th>
+              <td>
+                <input type="number" name="{{form.peso.html_name}}"
+                  step="any" required="True" id="id_{{form.peso.html_name}}">
+                </td>
+            </tr>
+            <tr>
+              <th>
+                <label for="id_{{form.data_pesagem.html_name}}">{{ form.data_pesagem.label }}:</label>
+              </th>
+              <td>
+                <input type="date" name="{{form.data_pesagem.html_name}}"
+                        required="True" id="id_{{form.data_pesagem.html_name}}">
+              </td>
+            </tr>
            <tr>
               <td></td>
               <td>
                 <a href="../dashboard" class="pure-button">Cancelar</a>
-                <input class="pure-button pure-button-primary" type="submit" value="Registrar" />
+                <input class="pure-button pure-button-primary" type="submit" value="Registrar">
               </td>
           </tr>
-       </table>
+       </tbody>
+     </table>
      </form>
 
   </div>

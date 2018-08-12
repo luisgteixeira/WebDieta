@@ -18,11 +18,19 @@
           <tr>
             <td>
               <label>{{ form_info.data_inicio.label }}</label>
-              {{ form_info.data_inicio }}
+              <input id="id_{{form_info.data_inicio.html_name}}"
+                   type="date"
+                   name="{{form_info.data_inicio.html_name}}"
+                   placeholder="{{form_info.data_inicio.label}}"
+                   value="{{ form_info.data_inicio.value }}"  />
             </td>
             <td>
               <label>{{ form_info.data_final.label }}</label>
-              {{ form_info.data_final }}
+              <input id="id_{{form_info.data_final.html_name}}"
+                   type="date"
+                   name="{{form_info.data_final.html_name}}"
+                   placeholder="{{form_info.data_final.label}}"
+                   value="{{ form_info.data_final.value }}"  />
             </td>
           </tr>
           <tr>
@@ -56,7 +64,11 @@
             </td>
             <td>
               <label>{{ form_refeicao.horario.label }}</label>
-              {{ form_refeicao.horario }}
+              <input id="id_{{form_refeicao.horario.html_name}}"
+                   type="time"
+                   name="{{form_refeicao.horario.html_name}}"
+                   placeholder="{{form_refeicao.horario.label}}"
+                   value="{{ form_refeicao.horario.value }}"  />
             </td>
           </tr>
           <tr>
